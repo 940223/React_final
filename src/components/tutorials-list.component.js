@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 export default class TutorialsList extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
+    this.onChangeSearchname = this.onChangeSearchname.bind(this);
     this.retrieveTutorials = this.retrieveTutorials.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveTutorial = this.setActiveTutorial.bind(this);
     this.removeAllTutorials = this.removeAllTutorials.bind(this);
-    this.searchTitle = this.searchTitle.bind(this);
+    this.searchname = this.searchname.bind(this);
 
     this.state = {
       tutorials: [],
       currentTutorial: null,
       currentIndex: -1,
-      searchTitle: ""
+      searchname: ""
     };
   }
 
@@ -24,11 +24,11 @@ export default class TutorialsList extends Component {
     this.retrieveTutorials();
   }
 
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
+  onChangeSearchname(e) {
+    const searchname = e.target.value;
 
     this.setState({
-      searchTitle: searchTitle
+      searchname: searchname
     });
   }
 
@@ -71,8 +71,8 @@ export default class TutorialsList extends Component {
       });
   }
 
-  searchTitle() {
-    TutorialDataService.findByName(this.state.searchTitle)
+  searchname() {
+    TutorialDataService.findByName(this.state.searchname)
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -85,33 +85,11 @@ export default class TutorialsList extends Component {
   }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
-
+    const { searchname, tutorials, currentTutorial, currentIndex } = this.state;
     return (
       <div className="list row">
-        <div className="col-md-8">
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={this.searchTitle}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
         <div className="col-md-6">
-          <h4>Tutorials List</h4>
-
+          <h4>User List</h4>
           <ul className="list-group">
             {tutorials &&
               tutorials.map((tutorial, index) => (
@@ -128,17 +106,12 @@ export default class TutorialsList extends Component {
               ))}
           </ul>
 
-          <button
-            className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllTutorials}
-          >
-            Remove All
-          </button>
+
         </div>
         <div className="col-md-6">
           {currentTutorial ? (
             <div>
-              <h4>Tutorial</h4>
+              <h4>Detail</h4>
               <div>
                 <label>
                   <strong>name:</strong>
@@ -151,21 +124,12 @@ export default class TutorialsList extends Component {
                 </label>{" "}
                 {currentTutorial.pw}
               </div>
-              <div>
-                {currentTutorial.published ? "Published" : "Pending"}
-              </div>
-
-              <Link
-                to={"/tutorials/" + currentTutorial.id}
-                className="badge badge-warning"
-              >
-                Edit
-              </Link>
+             
             </div>
           ) : (
             <div>
               <br />
-              <p>Please click on a Tutorial...</p>
+              <p></p>
             </div>
           )}
         </div>
@@ -173,3 +137,40 @@ export default class TutorialsList extends Component {
     );
   }
 }
+/*
+          <button
+            className="m-3 btn btn-sm btn-danger"
+            onClick={this.removeAllTutorials}
+          >
+            Remove All
+          </button>
+        <div className="col-md-8">
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search by name"
+              value={searchname}
+              onChange={this.onChangeSearchname}
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={this.searchname}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+              <Link
+                to={"/tutorials/" + currentTutorial.id}
+                className="badge badge-warning"
+              >
+                Edit
+              </Link>
+               <div>
+                {currentTutorial.published ? "Published" : "Pending"}
+              </div>
+*/

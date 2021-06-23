@@ -73,28 +73,28 @@ export default class AddTutorial extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="title"
+                id="name"
                 required
                 value={this.state.name}
                 onChange={this.onChangeTitle}
-                name="title"
+                name="name"
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Description</label>
+              <label htmlFor="pw">PW</label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
-                id="description"
+                id="pw"
                 required
                 value={this.state.pw}
                 onChange={this.onChangepw}
-                name="description"
+                name="pw"
               />
             </div>
 
